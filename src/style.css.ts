@@ -60,7 +60,7 @@ const row = style({
   justifyContent: 'space-between',
 });
 
-const img = style({ marginTop: 'auto', maxWidth: '212px', objectFit: 'contain' });
+const img = style({ marginTop: 'auto', maxWidth: '239px', objectFit: 'contain' });
 
 export const stepStyle = style({});
 

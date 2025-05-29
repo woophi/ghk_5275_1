@@ -4,7 +4,6 @@ import { Checkbox } from '@alfalab/core-components/checkbox';
 import { Collapse } from '@alfalab/core-components/collapse';
 import { Gap } from '@alfalab/core-components/gap';
 import { Input } from '@alfalab/core-components/input';
-import { List } from '@alfalab/core-components/list';
 import { PureCell } from '@alfalab/core-components/pure-cell';
 import { Steps } from '@alfalab/core-components/steps';
 import { Tag } from '@alfalab/core-components/tag';
@@ -19,7 +18,6 @@ import hb from './assets/hb.png';
 import img1 from './assets/img1.png';
 import img2 from './assets/img2.png';
 import img3 from './assets/img3.png';
-import img4 from './assets/img4.png';
 import pds from './assets/pds.png';
 import pers from './assets/pers.png';
 import piec from './assets/piec.png';
@@ -27,7 +25,6 @@ import rubd from './assets/rubd.png';
 import wes from './assets/wes.png';
 import { LS, LSKeys } from './ls';
 import { appSt } from './style.css';
-import { ThxLayout } from './thx/ThxLayout';
 import { sendDataToGACalc } from './utils/events';
 import { round } from './utils/round';
 
@@ -56,8 +53,6 @@ const INTEREST_RATE = 0.07;
 
 const checks = [
   'Застрахованы на сумму до 2,8 млн ₽ в Агентстве по страхованию вкладов',
-  'Полностью наследуются на этапе накопления или выплат (кроме назначения пожизненной выплаты)',
-  'Не делятся при разводе, на них не может быть наложено взыскание и арест',
   'Негосударственный пенсионный фонд (НПФ) гарантирует безубыточность вложений на горизонте каждых пяти лет',
 ];
 
@@ -121,10 +116,9 @@ export const App = () => {
   }, []);
 
   const submit = () => {
-    window.gtag('event', '4581_confirm_var1');
+    window.gtag('event', '5275_confirm_var1');
     setLoading(true);
 
-    LS.setItem(LSKeys.ShowThx, true);
     setLoading(false);
     window.location.replace(
       'alfabank://multistep-route?fromModule=FORM&stepNumber=0&alias=invest-long-term-savings-open-alias&prefilledDataID=1001&version=2',
@@ -154,7 +148,7 @@ export const App = () => {
   };
 
   const openCalc = () => {
-    window.gtag('event', '4581_calc_var1');
+    window.gtag('event', '5275_calc_var1');
     setOpenBs(true);
   };
 
@@ -165,35 +159,30 @@ export const App = () => {
     });
   };
 
-  if (LS.getItem(LSKeys.ShowThx, false)) {
-    return <ThxLayout />;
-  }
-
   return (
     <>
       <div className={appSt.container}>
         <div className={appSt.imgBox}>
           <Typography.TitleResponsive style={{ maxWidth: '311px' }} tag="h1" view="medium" font="system" weight="bold">
-            Создайте начальный капитал для детей
+            Накопите на свои мечты
           </Typography.TitleResponsive>
           <Typography.Text style={{ maxWidth: '311px' }}>Программа долгосрочных сбережений</Typography.Text>
-          <img src={hb} alt="hb" width="100%" height={114} className={appSt.img} />
+          <img src={hb} alt="hb" width="100%" height={159} className={appSt.img} />
 
           <div className={appSt.imgSubBox}>
             <Typography.Text>
-              Более 1 млн семей
-              <br />
-              за 2024 оформили ПДС
+              Софинансирование от родителей
+              <br />и государства
             </Typography.Text>
           </div>
         </div>
 
         <div>
           <Typography.TitleResponsive tag="h2" view="small" font="system" weight="medium" style={{ marginBottom: '.5rem' }}>
-            Описание программы:
+            Что такое ПДС?
           </Typography.TitleResponsive>
           <Typography.Text view="primary-medium">
-            Программа долгосрочных сбережений (ПДС) – это удобный способ накопить средства для будущего ваших детей.
+            Это способ не просто копить деньги, а делать так, чтобы они работали на тебя
           </Typography.Text>
         </div>
 
@@ -205,10 +194,10 @@ export const App = () => {
           <PureCell.Content>
             <PureCell.Main>
               <Typography.Text view="primary-small" tag="p" weight="bold" defaultMargins={false}>
-                Высшее образование
+                На образование
               </Typography.Text>
               <Typography.Text view="component-secondary" color="secondary">
-                Позаботьтесь о платном обучении ребенка в ВУЗе
+                Знания — лучший подарок от родителей
               </Typography.Text>
             </PureCell.Main>
           </PureCell.Content>
@@ -224,7 +213,7 @@ export const App = () => {
                 Стартовый капитал
               </Typography.Text>
               <Typography.Text view="component-secondary" color="secondary">
-                Ваши инвестиции — основа бизнеса ребенка завтра
+                Инвестиции сегодня — основа бизнеса завтра
               </Typography.Text>
             </PureCell.Main>
           </PureCell.Content>
@@ -240,28 +229,12 @@ export const App = () => {
                 Своя квартира
               </Typography.Text>
               <Typography.Text view="component-secondary" color="secondary">
-                Помогите сформировать первоначальный взнос
+                Сформируй первоначальный взнос
               </Typography.Text>
             </PureCell.Main>
           </PureCell.Content>
           <PureCell.Graphics verticalAlign="center">
             <img src={img3} width={115} height={72} alt="img3" className={appSt.blueBoxImg} />
-          </PureCell.Graphics>
-        </PureCell>
-
-        <PureCell className={appSt.blueBox}>
-          <PureCell.Content>
-            <PureCell.Main>
-              <Typography.Text view="primary-small" tag="p" weight="bold" defaultMargins={false}>
-                Свадьба
-              </Typography.Text>
-              <Typography.Text view="component-secondary" color="secondary">
-                Организайте ребенку достойный праздник
-              </Typography.Text>
-            </PureCell.Main>
-          </PureCell.Content>
-          <PureCell.Graphics verticalAlign="center">
-            <img src={img4} width={115} height={72} alt="img4" className={appSt.blueBoxImg} />
           </PureCell.Graphics>
         </PureCell>
 
@@ -279,7 +252,7 @@ export const App = () => {
                 До 360 000 ₽
               </Typography.Text>
               <Typography.Text view="primary-small" color="secondary">
-                Добавит государство — как на счёт взрослого, так и ребёнка
+                Добавит государство после вступления в программу
               </Typography.Text>
             </PureCell.Main>
           </PureCell.Content>
@@ -295,7 +268,7 @@ export const App = () => {
                 До 1 320 000 ₽
               </Typography.Text>
               <Typography.Text view="primary-small" color="secondary">
-                Счёт на ребёнка даёт право на увеличенный налоговый вычет
+                Можно получить за счёт налогового вычета
               </Typography.Text>
             </PureCell.Main>
           </PureCell.Content>
@@ -361,7 +334,7 @@ export const App = () => {
         <Steps isVerticalAlign interactive={false} className={appSt.stepStyle}>
           <span>
             <Typography.Text tag="p" defaultMargins={false} view="primary-medium">
-              Вносите от 2000 ₽ год
+              Можно вносить любую сумму от 2000 ₽ год
             </Typography.Text>
             <Typography.Text view="primary-small" color="secondary">
               Для удобства можно подключить автоплатёж
@@ -369,7 +342,7 @@ export const App = () => {
           </span>
           <span>
             <Typography.Text tag="p" defaultMargins={false} view="primary-medium">
-              Государство добавляет до 36 000 ₽ в год на взрослый и детский счета и возвращает повышенный налоговый вычет
+              Государство добавляет до 36 000 ₽ в год и возвращает налоговый вычет до 88 000 ₽
             </Typography.Text>
             <Typography.Text view="primary-small" color="secondary">
               Гос.поддержку можно получать до 10 лет, а налоговый вычет — минимум 15 лет
@@ -383,7 +356,8 @@ export const App = () => {
               view="primary-small"
               color="secondary"
               onClick={() => {
-                window.location.replace('alfabank://longread?endpoint=v1/adviser/longreads/46688');
+                window.gtag('event', '5275_income_var1');
+                window.location.replace('alfabank://longread?endpoint=v1/adviser/longreads/55398');
               }}
               style={{
                 color: '#2A77EF',
@@ -444,17 +418,7 @@ export const App = () => {
             <Typography.TitleResponsive tag="h4" view="xsmall" font="system" weight="semibold">
               Единовременно
             </Typography.TitleResponsive>
-            <List tag="ol" colorMarker="accent">
-              <List.Item>
-                <Typography.Text view="primary-small">Через 15 лет после того, как вступили в программу</Typography.Text>
-              </List.Item>
-              <List.Item>
-                <Typography.Text view="primary-small">
-                  При достижении 55 лет у женщин и 60 лет у мужчин, если с начала участия прошло менее 15 лет, а выплата —
-                  менее 10% прожиточного минимума
-                </Typography.Text>
-              </List.Item>
-            </List>
+            <Typography.Text view="primary-small">Через 15 лет после того, как вступили в программу</Typography.Text>
           </div>
 
           <Gap size={16} />
@@ -468,9 +432,6 @@ export const App = () => {
             </Typography.Text>
             <Typography.Text view="primary-small">
               <b>Срочные.</b> Доступны через 15 лет после вступления в программу долгосрочных сбережений
-            </Typography.Text>
-            <Typography.Text view="primary-small">
-              <b>Дополнительные выплаты на пенсии.</b> Доступны после 55 лет у женщин и 60 — у мужчин
             </Typography.Text>
           </div>
           <Gap size={16} />
@@ -497,7 +458,7 @@ export const App = () => {
         <div style={{ marginTop: '1rem' }}>
           <div
             onClick={() => {
-              window.gtag('event', '4581_FAQ1_var1');
+              window.gtag('event', '5275_FAQ1_var1');
               setCollapsedItem(items => (items.includes('1') ? items.filter(item => item !== '1') : [...items, '1']));
             }}
             className={appSt.row}
@@ -514,7 +475,7 @@ export const App = () => {
         <div style={{ marginTop: '1rem' }}>
           <div
             onClick={() => {
-              window.gtag('event', '4581_FAQ2_var1');
+              window.gtag('event', '5275_FAQ2_var1');
               setCollapsedItem(items => (items.includes('2') ? items.filter(item => item !== '2') : [...items, '2']));
             }}
             className={appSt.row}
@@ -535,7 +496,7 @@ export const App = () => {
         <div style={{ marginTop: '1rem' }}>
           <div
             onClick={() => {
-              window.gtag('event', '4581_FAQ3_var1');
+              window.gtag('event', '5275_FAQ3_var1');
 
               setCollapsedItem(items => (items.includes('3') ? items.filter(item => item !== '3') : [...items, '3']));
             }}
@@ -555,7 +516,7 @@ export const App = () => {
         <div style={{ marginTop: '1rem' }}>
           <div
             onClick={() => {
-              window.gtag('event', '4581_FAQ4_var1');
+              window.gtag('event', '5275_FAQ4_var1');
 
               setCollapsedItem(items => (items.includes('4') ? items.filter(item => item !== '4') : [...items, '4']));
             }}
@@ -576,7 +537,7 @@ export const App = () => {
 
         <div
           onClick={() => {
-            window.gtag('event', '4581_moreinfo_var1');
+            window.gtag('event', '5275_moreinfo_var1');
             window.location.replace('https://alfa-npf.ru/');
           }}
           className={appSt.row}
